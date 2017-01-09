@@ -31,20 +31,20 @@ public class ExampleServiceTest {
         service.create(example);
 
         // Read
-        final Example read = service.getById("12345");
-        assertNotNull("Should not be null", read);
-        assertEquals(read.getId(), example.getId());
-        assertEquals(read.getMessage(), example.getMessage());
+        final Example persisted = service.getById("12345");
+        assertNotNull("Should not be null", persisted);
+        assertEquals(persisted.getId(), example.getId());
+        assertEquals(persisted.getMessage(), example.getMessage());
 
         // Update
         example.setMessage("Updated message");
         service.update(example);
 
         // Verify update
-        final Example readUpdated = service.getById("12345");
-        assertNotNull("Should not be null", readUpdated);
-        assertEquals(example.getId(), readUpdated.getId());
-        assertEquals(example.getMessage(), readUpdated.getMessage());
+        final Example updated = service.getById("12345");
+        assertNotNull("Should not be null", updated);
+        assertEquals(example.getId(), updated.getId());
+        assertEquals(example.getMessage(), updated.getMessage());
 
         // Delete
         service.delete("12345");
