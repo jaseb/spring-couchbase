@@ -15,7 +15,6 @@ import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 /**
  * Copyright (c) 2017 Jase Batchelor. All rights reserved.
@@ -66,11 +65,11 @@ public class ExampleControllerITest {
         assertEquals("Updated message", updated.getBody().getMessage());
 
         // Delete
-        template.delete(base.toString() + "12345", updated);
+        template.delete(base.toString() + "12345");
 
         // Verify delete
         ResponseEntity<Example> deleted =
                 template.getForEntity(base.toString() + "12345", Example.class);
-        assertNull("Should be null", deleted.getBody());
+        assertEquals("Entity not found", deleted.getBody().getMessage());
     }
 }

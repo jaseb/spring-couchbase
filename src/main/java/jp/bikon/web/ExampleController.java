@@ -1,5 +1,6 @@
 package jp.bikon.web;
 
+import jp.bikon.common.exceptions.RequestUtils;
 import jp.bikon.model.Example;
 import jp.bikon.service.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +41,24 @@ public class ExampleController {
     @PutMapping("/{id}")
     public Example update(@PathVariable("id") final String id, @Valid @RequestBody final Example entity) {
 
-        // TODO - check entity exists by querying with id.
+        RequestUtils.checkEqual(id, entity.getId());
+        RequestUtils.checkNotNull(service.exists(id));
+
         return service.update(entity);
     }
 
     @GetMapping("/{id}")
     public Example getById(@PathVariable("id") final String id) {
-        return service.getById(id);
+
+        final Example example = service.getById(id);
+        RequestUtils.checkNotNull(example);
+
+        return example;
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") final String id) {
+        RequestUtils.checkExists(service.exists(id));
         service.delete(id);
     }
 

@@ -28,8 +28,6 @@ public class ExampleServiceImpl implements ExampleService {
 
     @Override
     public Example update(final Example entity) {
-
-        // TODO verify existence prior to saving.
         return repository.save(entity);
     }
 
@@ -41,5 +39,10 @@ public class ExampleServiceImpl implements ExampleService {
     @Override
     public void delete(final String id) {
         repository.delete(id);
+    }
+
+    @Override
+    public boolean exists(final String id) {
+        return repository.exists(id);
     }
 }

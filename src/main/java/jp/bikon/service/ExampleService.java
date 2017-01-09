@@ -16,4 +16,6 @@ public interface ExampleService {
     Example getById(String id);
 
     void delete(String id);
+
+    boolean exists(String id);
 }
